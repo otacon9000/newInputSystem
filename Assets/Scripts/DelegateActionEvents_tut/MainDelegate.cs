@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Main : MonoBehaviour
+public class MainDelegate : MonoBehaviour
 {
     public delegate void ChangeColor(Color newColor);
     public ChangeColor onColorChange;
