@@ -181,7 +181,7 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
                 {
                     ""name"": ""modifier"",
                     ""id"": ""7c044ad1-0707-4481-a270-d611ca15cbac"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""path"": ""<Keyboard>/g"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -192,7 +192,7 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
                 {
                     ""name"": ""button"",
                     ""id"": ""99b14614-a3dd-4cd7-b23f-99b550765283"",
-                    ""path"": ""<Keyboard>/d"",
+                    ""path"": ""<Keyboard>/h"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
