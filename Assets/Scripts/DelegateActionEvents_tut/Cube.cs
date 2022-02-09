@@ -7,11 +7,18 @@ public class Cube : MonoBehaviour
 {
     public Text scoreText;
 
+    private void OnEnable()
+    {
+        MainLambda.OnHello = () => Debug.Log("Hello");
+    }
+
     private void Start()
     {
         MainEvent.onClick += TurnRed;
         MainEvent.onTeleport += Teleport;
         MainAction.OnScoreChange += UpdateScoreText;
+
+        
     }
 
     public void TurnRed()

@@ -7,16 +7,37 @@ public class MainLambda : MonoBehaviour
 {
     public Action<int, int> Sum;
 
+    public static Action OnHello;
+
+    public Func<int> onGetName;
+
+    public Func<int, int, string> onCalculateSum;
+
     private void Start()
     {
-        Sum = (a, b) => Debug.Log(a + b);
+        Sum = (a, b) =>
+        {
+            var total = a + b;
+
+            Debug.Log("Total: " + total);
+        };
 
         Sum(5, 12);
-    }
 
-    void CalculateSum(int a, int b) 
-    {
-        var total = a + b;
-        Debug.Log("Total: " + total);
+        if (OnHello != null)
+            OnHello();
+
+        onGetName = () => this.gameObject.name.Length;
+
+        int nameCount = onGetName();
+
+        onCalculateSum = (a, b) => (a + b).ToString();
+
+        //string value = onCalculateSum(21, 1);
+
+        Debug.Log(onCalculateSum(21, 1));
+   
+
     }
+    
 }
