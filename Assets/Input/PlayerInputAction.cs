@@ -308,6 +308,33 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""SpherePlayer"",
+            ""id"": ""8efc70ac-2ac3-4a83-88c9-ad1b99cbc26a"",
+            ""actions"": [
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""c1b66dbd-b4d0-4ff8-b854-3590d9e3118f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Tap,Hold(pressPoint=1)""
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""f09f9efc-decf-457f-a242-603ee7188cfc"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -322,6 +349,9 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
         m_Driving = asset.FindActionMap("Driving", throwIfNotFound: true);
         m_Driving_Movement = m_Driving.FindAction("Movement", throwIfNotFound: true);
         m_Driving_PlayerState = m_Driving.FindAction("PlayerState", throwIfNotFound: true);
+        // SpherePlayer
+        m_SpherePlayer = asset.FindActionMap("SpherePlayer", throwIfNotFound: true);
+        m_SpherePlayer_Jump = m_SpherePlayer.FindAction("Jump", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -465,6 +495,39 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
         }
     }
     public DrivingActions @Driving => new DrivingActions(this);
+
+    // SpherePlayer
+    private readonly InputActionMap m_SpherePlayer;
+    private ISpherePlayerActions m_SpherePlayerActionsCallbackInterface;
+    private readonly InputAction m_SpherePlayer_Jump;
+    public struct SpherePlayerActions
+    {
+        private @PlayerInputAction m_Wrapper;
+        public SpherePlayerActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Jump => m_Wrapper.m_SpherePlayer_Jump;
+        public InputActionMap Get() { return m_Wrapper.m_SpherePlayer; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(SpherePlayerActions set) { return set.Get(); }
+        public void SetCallbacks(ISpherePlayerActions instance)
+        {
+            if (m_Wrapper.m_SpherePlayerActionsCallbackInterface != null)
+            {
+                @Jump.started -= m_Wrapper.m_SpherePlayerActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_SpherePlayerActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_SpherePlayerActionsCallbackInterface.OnJump;
+            }
+            m_Wrapper.m_SpherePlayerActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
+            }
+        }
+    }
+    public SpherePlayerActions @SpherePlayer => new SpherePlayerActions(this);
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -476,5 +539,9 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnPlayerState(InputAction.CallbackContext context);
+    }
+    public interface ISpherePlayerActions
+    {
+        void OnJump(InputAction.CallbackContext context);
     }
 }

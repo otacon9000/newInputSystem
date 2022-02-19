@@ -295,6 +295,33 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "SpherePlayer",
+            "id": "8efc70ac-2ac3-4a83-88c9-ad1b99cbc26a",
+            "actions": [
+                {
+                    "name": "Jump",
+                    "type": "PassThrough",
+                    "id": "c1b66dbd-b4d0-4ff8-b854-3590d9e3118f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Tap,Hold(pressPoint=1)"
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f09f9efc-decf-457f-a242-603ee7188cfc",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
