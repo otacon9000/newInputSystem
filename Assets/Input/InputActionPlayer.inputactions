@@ -1,0 +1,33 @@
+{
+    "name": "InputActionPlayer",
+    "maps": [
+        {
+            "name": "UIMap",
+            "id": "b3da4985-d56e-4d2b-967c-a3f36f2ccddc",
+            "actions": [
+                {
+                    "name": "FillBar",
+                    "type": "Button",
+                    "id": "6a2eef6e-9e99-4772-b7d9-0358559cb9f1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c6e5f271-03d5-4a9b-a7e5-01808483e70a",
+                    "path": "<Keyboard>/space",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FillBar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
