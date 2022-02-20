@@ -223,6 +223,7 @@ namespace Game.Scripts.LiveObjects
             {
                 _currentZoneID++;
                 onZoneInteractionComplete?.Invoke(this);
+                Debug.Log("zoneID: " + zoneID);
             }
         }
 

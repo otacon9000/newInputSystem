@@ -22,6 +22,9 @@ namespace Game.Scripts.Player
         [SerializeField]
         private GameObject _model;
 
+        private float _horizontalInput;
+        private float _verticalInput;
+
 
         private void OnEnable()
         {
@@ -50,34 +53,37 @@ namespace Game.Scripts.Player
 
         private void Update()
         {
-            if (_canMove == true)
-                CalcutateMovement();
+            //if (_canMove == true)
+            //    CalcutateMovement();
 
         }
 
-        private void CalcutateMovement()
+        public void CalcutateMovement(float h, float v)
         {
-            _playerGrounded = _controller.isGrounded;
-            float h = Input.GetAxisRaw("Horizontal");
-            float v = Input.GetAxisRaw("Vertical");
-
-            transform.Rotate(transform.up, h);
-
-            var direction = transform.forward * v;
-            var velocity = direction * _speed;
-
-
-            _anim.SetFloat("Speed", Mathf.Abs(velocity.magnitude));
-
-
-            if (_playerGrounded)
-                velocity.y = 0f;
-            if (!_playerGrounded)
+            if (_canMove == true)
             {
-                velocity.y += -20f * Time.deltaTime;
+                _playerGrounded = _controller.isGrounded;
+                //float h = Input.GetAxisRaw("Horizontal");
+                //float v = Input.GetAxisRaw("Vertical");
+
+                transform.Rotate(transform.up, h);
+
+                var direction = transform.forward * v;
+                var velocity = direction * _speed;
+
+
+                _anim.SetFloat("Speed", Mathf.Abs(velocity.magnitude));
+
+
+                if (_playerGrounded)
+                    velocity.y = 0f;
+                if (!_playerGrounded)
+                {
+                    velocity.y += -20f * Time.deltaTime;
+                }
+
+                _controller.Move(velocity * Time.deltaTime);
             }
-            
-            _controller.Move(velocity * Time.deltaTime);                      
 
         }
 
