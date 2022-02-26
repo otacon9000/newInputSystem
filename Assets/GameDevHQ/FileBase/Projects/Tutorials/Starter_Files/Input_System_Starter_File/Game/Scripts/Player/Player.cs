@@ -51,12 +51,12 @@ namespace Game.Scripts.Player
                 Debug.Log("Failed to connect the Animator");
         }
 
-        private void Update()
-        {
-            //if (_canMove == true)
-            //    CalcutateMovement();
+        //private void Update()
+        //{
+        //    //if (_canMove == true)
+        //    //    CalcutateMovement();
 
-        }
+        //}
 
         public void CalcutateMovement(float h, float v)
         {
@@ -87,7 +87,7 @@ namespace Game.Scripts.Player
 
         }
 
-        private void InteractableZone_onZoneInteractionComplete(InteractableZone zone)
+        public void InteractableZone_onZoneInteractionComplete(InteractableZone zone)
         {
             switch(zone.GetZoneID())
             {
@@ -125,7 +125,7 @@ namespace Game.Scripts.Player
 
         private void OnDisable()
         {
-            InteractableZone.onZoneInteractionComplete -= InteractableZone_onZoneInteractionComplete;
+            //InteractableZone.onZoneInteractionComplete -= InteractableZone_onZoneInteractionComplete;
             Laptop.onHackComplete -= ReleasePlayerControl;
             Laptop.onHackEnded -= ReturnPlayerControl;
             Forklift.onDriveModeEntered -= ReleasePlayerControl;

@@ -31,6 +31,24 @@ public class InputManager : MonoBehaviour
     {
         _input = new GameInputs();
         _input.Player.Enable();
+        _input.Player.Detonate.performed += Detonate_performed;
+        _input.Player.Interact.performed += Interact_performed;
+        _input.Player.Interact.canceled += Interact_canceled;
+    }
+
+    private void Interact_canceled(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        Debug.Log("HoldAction ended");
+    }
+
+    private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        Debug.Log("HoldAction ended");
+    }
+
+    private void Detonate_performed(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        Debug.Log("HoldAction ended");
     }
 
     private void Update()
@@ -40,9 +58,7 @@ public class InputManager : MonoBehaviour
 
     public void MovePlayer()
     {
-        Debug.Log("NIS::MOVE");
         Vector2 move = _input.Player.Movement.ReadValue<Vector2>();
-
         _player.CalcutateMovement(move.x, move.y);
     }
 
