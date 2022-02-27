@@ -25,8 +25,8 @@ namespace Game.Scripts.LiveObjects
 
         private void OnEnable()
         {
-            InteractableZone.onHoldStarted += InteractableZone_onHoldStarted;
-            InteractableZone.onHoldEnded += InteractableZone_onHoldEnded;
+            //InteractableZone.onHoldStarted += InteractableZone_onHoldStarted;
+            //InteractableZone.onHoldEnded += InteractableZone_onHoldEnded;
         }
 
         private void Update()
@@ -64,7 +64,7 @@ namespace Game.Scripts.LiveObjects
             }
         }
 
-        private void InteractableZone_onHoldStarted(int zoneID)
+        public void InteractableZone_onHoldStarted(int zoneID)
         {
             if (zoneID == 3 && _hacked == false) //Hacking terminal
             {
@@ -74,7 +74,7 @@ namespace Game.Scripts.LiveObjects
             }
         }
 
-        private void InteractableZone_onHoldEnded(int zoneID)
+        public void InteractableZone_onHoldEnded(int zoneID)
         {
             if (zoneID == 3) //Hacking terminal
             {
@@ -110,8 +110,8 @@ namespace Game.Scripts.LiveObjects
         
         private void OnDisable()
         {
-            InteractableZone.onHoldStarted -= InteractableZone_onHoldStarted;
-            InteractableZone.onHoldEnded -= InteractableZone_onHoldEnded;
+            //InteractableZone.onHoldStarted -= InteractableZone_onHoldStarted;
+            //InteractableZone.onHoldEnded -= InteractableZone_onHoldEnded;
         }
     }
 

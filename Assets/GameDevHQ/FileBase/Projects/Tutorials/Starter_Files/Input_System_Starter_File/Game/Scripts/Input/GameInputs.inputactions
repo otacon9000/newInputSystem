@@ -200,7 +200,7 @@
                     "name": "",
                     "id": "0c33d1aa-5b81-4830-b024-99cad415d175",
                     "path": "<Keyboard>/e",
-                    "interactions": "Hold",
+                    "interactions": "Hold,Press",
                     "processors": "",
                     "groups": "",
                     "action": "Interact",

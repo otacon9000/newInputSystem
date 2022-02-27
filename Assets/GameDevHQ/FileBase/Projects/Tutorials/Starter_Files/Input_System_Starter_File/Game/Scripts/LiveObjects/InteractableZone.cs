@@ -9,6 +9,7 @@ namespace Game.Scripts.LiveObjects
 {
     public class InteractableZone : MonoBehaviour
     {
+
         private enum ZoneType
         {
             Collectable,
@@ -43,7 +44,7 @@ namespace Game.Scripts.LiveObjects
         [SerializeField]
         private KeyState _keyState;
         [SerializeField]
-        private GameObject _marker;
+        private   GameObject _marker;
 
         private bool _inHoldState = false;
 
@@ -60,7 +61,6 @@ namespace Game.Scripts.LiveObjects
                          
             }
         }
-
 
         public static event Action<InteractableZone> onZoneInteractionComplete;
         public static event Action<int> onHoldStarted;
@@ -120,60 +120,62 @@ namespace Game.Scripts.LiveObjects
             }
         }
 
-        private void Update()
-        {
-            if (_inZone == true)
-            {
+        //private void Update()
+        //{
+        //    if (_inZone == true)
+        //    {
 
-                if (Input.GetKeyDown(_zoneKeyInput) && _keyState != KeyState.PressHold)
-                {
-                    //press
-                    switch (_zoneType)
-                    {
-                        case ZoneType.Collectable:
-                            if (_itemsCollected == false)
-                            {
-                                CollectItems();
-                                _itemsCollected = true;
-                                UIManager.Instance.DisplayInteractableZoneMessage(false);
-                            }
-                            break;
+        //        if (Input.GetKeyDown(_zoneKeyInput) && _keyState != KeyState.PressHold)
+        //        {
+        //            //press
+        //            switch (_zoneType)
+        //            {
+        //                //case ZoneType.Collectable:
+        //                //    if (_itemsCollected == false)
+        //                //    {
+        //                //        CollectItems();
+        //                //        _itemsCollected = true;
+        //                //        UIManager.Instance.DisplayInteractableZoneMessage(false);
+        //                //    }
+        //                //    break;
 
-                        case ZoneType.Action:
-                            if (_actionPerformed == false)
-                            {
-                                PerformAction();
-                                _actionPerformed = true;
-                                UIManager.Instance.DisplayInteractableZoneMessage(false);
-                            }
-                            break;
-                    }
-                }
-                else if (Input.GetKey(_zoneKeyInput) && _keyState == KeyState.PressHold && _inHoldState == false)
-                {
-                    _inHoldState = true;
+        //                //case ZoneType.Action:
+        //                //    if (_actionPerformed == false)
+        //                //    {
+        //                //        PerformAction();
+        //                //        _actionPerformed = true;
+        //                //        UIManager.Instance.DisplayInteractableZoneMessage(false);
+        //                //    }
+        //                //    break;
+        //            }
+        //        }
+        //        //else if (Input.GetKey(_zoneKeyInput) && _keyState == KeyState.PressHold && _inHoldState == false)
+        //        //{
+        //        //    _inHoldState = true;
 
-                   
 
-                    switch (_zoneType)
-                    {                      
-                        case ZoneType.HoldAction:
-                            PerformHoldAction();
-                            break;           
-                    }
-                }
 
-                if (Input.GetKeyUp(_zoneKeyInput) && _keyState == KeyState.PressHold)
-                {
-                    _inHoldState = false;
-                    onHoldEnded?.Invoke(_zoneID);
-                }
+        //        //    switch (_zoneType)
+        //        //    {                      
+        //        //        case ZoneType.HoldAction:
+        //        //            PerformHoldAction();
+        //        //            break;           
+        //        //    }
+        //        //}
 
-               
-            }
-        }
+        //        //if (Input.GetKeyUp(_zoneKeyInput) && _keyState == KeyState.PressHold)
+        //        //{
+        //        //    _inHoldState = false;
+        //        //    onHoldEnded?.Invoke(_zoneID);
+        //        //}
+
+
+        //    }
+        //}
+
+  
        
-        private void CollectItems()
+        public void CollectItems()
         {
             foreach (var item in _zoneItems)
             {
@@ -183,12 +185,11 @@ namespace Game.Scripts.LiveObjects
             UIManager.Instance.UpdateInventoryDisplay(_inventoryIcon);
 
             CompleteTask(_zoneID);
-
-            onZoneInteractionComplete?.Invoke(this);
-
+        
+            //onZoneInteractionComplete?.Invoke(this);
         }
 
-        private void PerformAction()
+        public void PerformAction()
         {
             foreach (var item in _zoneItems)
             {
@@ -198,6 +199,7 @@ namespace Game.Scripts.LiveObjects
             if (_inventoryIcon != null)
                 UIManager.Instance.UpdateInventoryDisplay(_inventoryIcon);
 
+            
             onZoneInteractionComplete?.Invoke(this);
         }
 
@@ -223,7 +225,7 @@ namespace Game.Scripts.LiveObjects
             {
                 _currentZoneID++;
                 onZoneInteractionComplete?.Invoke(this);
-                Debug.Log("zoneID: " + zoneID);
+                Debug.Log("zoneID: " + _currentZoneID);
             }
         }
 
@@ -253,7 +255,27 @@ namespace Game.Scripts.LiveObjects
         private void OnDisable()
         {
             InteractableZone.onZoneInteractionComplete -= SetMarker;
-        }       
+        }     
+
+        //my function 
+        public void DisableMarker()
+        {
+            this.gameObject.SetActive(false);
+           
+            //_marker.SetActive(false);
+        }
+
+        public void EndCollect()
+        {
+            _itemsCollected = true;
+            UIManager.Instance.DisplayInteractableZoneMessage(false);
+        }
+
+        public void EndPerformed()
+        {
+            _actionPerformed = true;
+            UIManager.Instance.DisplayInteractableZoneMessage(false);
+        }
         
     }
 }
