@@ -20,7 +20,7 @@ namespace Game.Scripts.LiveObjects
             InteractableZone.onZoneInteractionComplete += InteractableZone_onZoneInteractionComplete;
         }
 
-        private void InteractableZone_onZoneInteractionComplete(InteractableZone zone)
+        public void InteractableZone_onZoneInteractionComplete(InteractableZone zone)
         {
             
             if (_isReadyToBreak == false && _brakeOff.Count >0)

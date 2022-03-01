@@ -45,7 +45,7 @@ public class InputManager : MonoBehaviour
     [SerializeField]
     private InteractableZone _forkLiftZone;
     [SerializeField]
-    private InteractableZone _blockZone;
+    private InteractableZone _crateZone;
     [SerializeField]
     private InteractableZone _endZone;
 
@@ -156,6 +156,16 @@ public class InputManager : MonoBehaviour
                 _input.ForkLift.Enable();
                 _forkLiftZone.PerformAction();
                 _forkLiftZone.DisableMarker();
+                break;
+            case 6:
+                Debug.Log("Case interactable: 6");
+                //UIManager.Instance.DisplayInteractableZoneMessage(false);
+                _crateZone.PerformAction();
+                _crateZone.EndPerformed();
+                _crateZone.DisableMarker();
+                break;
+            case 7:
+                _endZone.PerformAction();
                 break;
 
 

@@ -7823,7 +7823,7 @@ MonoBehaviour:
   _hackingZone: {fileID: 2029547919}
   _droneZone: {fileID: 1810029383}
   _forkLiftZone: {fileID: 1277958656}
-  _blockZone: {fileID: 197238855}
+  _crateZone: {fileID: 197238855}
   _endZone: {fileID: 965513072}
 --- !u!4 &427547944
 Transform:
