@@ -7816,6 +7816,7 @@ MonoBehaviour:
   _player: {fileID: 359860633}
   _drone: {fileID: 1073608670}
   _laptop: {fileID: 816558616}
+  _forkLift: {fileID: 402105197}
   _c4Zone: {fileID: 1176696857}
   _placeC4Zone: {fileID: 482471385}
   _detonateZone: {fileID: 564970562}

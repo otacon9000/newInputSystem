@@ -28,6 +28,8 @@ public class InputManager : MonoBehaviour
     private Drone _drone;
     [SerializeField]
     private Laptop _laptop;
+    [SerializeField]
+    private Forklift _forkLift;
 
     [Header("InteractablZone")]
     [SerializeField]
@@ -61,8 +63,29 @@ public class InputManager : MonoBehaviour
         _input.Player.Interact.canceled += Interact_canceled;
 
         _input.Drone.DroneToPlayer.performed += DroneToPlayer_performed;
+
+        //_input.ForkLift.LiftDown.canceled += LiftDown_performed;
+        //_input.ForkLift.LiftUp.canceled += LiftUp_performed;
+        _input.ForkLift.ForkLiftToPlayer.performed += ForkLiftToPlayer_performed;
    
     }
+
+    private void ForkLiftToPlayer_performed(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        _input.ForkLift.Disable();
+        _input.Player.Enable();
+        _forkLift.ExitDriveMode();
+    }
+
+    //private void LiftUp_performed(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    //{
+    //    _forkLift.LiftUpRoutine();
+    //}
+
+    //private void LiftDown_performed(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    //{
+    //    _forkLift.LiftDownRoutine();
+    //}
 
     private void DroneToPlayer_performed(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
@@ -102,7 +125,6 @@ public class InputManager : MonoBehaviour
                 _placeC4Zone.DisableMarker();
                 break;
             case 2:
-
                 break;
             case 3:
                 Debug.Log("Case interactable: 3");
@@ -114,14 +136,19 @@ public class InputManager : MonoBehaviour
                 break;
             case 4:
                 Debug.Log("Case interactable: 4");
-
+                UIManager.Instance.DisplayInteractableZoneMessage(false);
                 _input.Player.Disable();
                 _input.Drone.Enable();
+                _droneZone.PerformAction();
+                _droneZone.DisableMarker();
                 break;
-                //case 5:
-                //    Debug.Log("Case interactable: 5");
-
-                //    break;
+            case 5:
+                Debug.Log("Case interactable: 5");
+                _input.Player.Disable();
+                _input.ForkLift.Enable();
+                _forkLiftZone.PerformAction();
+                _forkLiftZone.DisableMarker();
+                break;
 
 
         }
@@ -140,15 +167,14 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
-        //only for test
-        //if (Input.GetKeyDown(KeyCode.U))
-        //    {
-        //        _input.Player.Disable();
-        //        _input.Drone.Enable();
-        //    }
 
         MovePlayer();
         MoveDrone();
+        if (InteractableZone.CurrentZoneID == 6)
+        {
+            MoveForkLift();
+            ControlLift();
+        }
     }
 
     private void FixedUpdate()
@@ -177,6 +203,21 @@ public class InputManager : MonoBehaviour
         float thrust = _input.Drone.Thrust.ReadValue<float>();
         _drone.CalculateThrust(thrust);
     }
+
+    public void MoveForkLift()
+    {
+        Vector2 move = _input.ForkLift.Movement.ReadValue<Vector2>();
+        _forkLift.CalcutateMovement(move.x, move.y);
+    }
+
+    public void ControlLift()
+    {
+        float value = _input.ForkLift.LiftControls.ReadValue<float>();
+        _forkLift.LiftControls(value);
+
+    }
+
+
 }
 
 

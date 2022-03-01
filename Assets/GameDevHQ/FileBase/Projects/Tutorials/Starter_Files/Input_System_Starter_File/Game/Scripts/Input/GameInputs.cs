@@ -213,7 +213,7 @@ public class @GameInputs : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""0c33d1aa-5b81-4830-b024-99cad415d175"",
                     ""path"": ""<Keyboard>/e"",
-                    ""interactions"": ""Hold,Press"",
+                    ""interactions"": ""Press,Hold"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Interact"",
@@ -224,7 +224,7 @@ public class @GameInputs : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""d5d7aafa-654b-4731-a731-cbf55ee6fb8d"",
                     ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press,Hold"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Interact"",
@@ -558,6 +558,236 @@ public class @GameInputs : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""ForkLift"",
+            ""id"": ""42dc2e88-c5fe-468c-92f9-980c085609a8"",
+            ""actions"": [
+                {
+                    ""name"": ""Movement"",
+                    ""type"": ""Value"",
+                    ""id"": ""3386041e-6f84-49af-b0b5-39ed77fa802a"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""ForkLiftToPlayer"",
+                    ""type"": ""Button"",
+                    ""id"": ""88dd062d-1c88-47ad-8ab6-211bd1fd55fc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""LiftControls"",
+                    ""type"": ""Value"",
+                    ""id"": ""c6df391d-7c8d-4575-b0b6-79bd2e56863c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""6088b6d5-96d6-4c23-be0b-2e6ffab032d4"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""ad3be384-1570-4924-9309-a1d5d1e01552"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""51e199b2-9abd-4dfc-bfe0-4f5b6b781fa5"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""7ce92ffa-95bc-4032-925d-1ecd563101b1"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""ed8b68d4-666b-4757-a6d4-df7056a956a6"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""LeftStick"",
+                    ""id"": ""c5c2307e-ce5e-4cf9-a8c1-6a5b88c01e90"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""bd501a2a-1248-475d-892f-13336cb435a7"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""e4733e6f-0166-4172-b98b-e7f65a289edc"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""c518caed-7653-4582-b3a0-00f9f47ce131"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""339d4a93-5d07-415a-9b98-92372dff2a1d"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""01d634e4-5c1f-4d2e-9742-31c5fc0c587e"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ForkLiftToPlayer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""207edb94-3659-4663-beca-3436abb28dfa"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ForkLiftToPlayer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Keybord"",
+                    ""id"": ""5847eaa0-a7f9-44d8-afde-6928da4c71d1"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LiftControls"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""4dc84147-8b39-46ef-81cc-489ee3c5b6fb"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LiftControls"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""8046c2f8-27f6-4d83-8a55-c3352a56fd59"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LiftControls"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""RightStick"",
+                    ""id"": ""eecd04de-3fcf-408d-8898-9b11dde66232"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LiftControls"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""40a95998-bccc-4ade-a2be-c5980450fa9a"",
+                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LiftControls"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""13a1f65c-fd8a-4b24-ac3c-805fe5090f78"",
+                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LiftControls"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -573,6 +803,11 @@ public class @GameInputs : IInputActionCollection, IDisposable
         m_Drone_Rotate = m_Drone.FindAction("Rotate", throwIfNotFound: true);
         m_Drone_Thrust = m_Drone.FindAction("Thrust", throwIfNotFound: true);
         m_Drone_DroneToPlayer = m_Drone.FindAction("DroneToPlayer", throwIfNotFound: true);
+        // ForkLift
+        m_ForkLift = asset.FindActionMap("ForkLift", throwIfNotFound: true);
+        m_ForkLift_Movement = m_ForkLift.FindAction("Movement", throwIfNotFound: true);
+        m_ForkLift_ForkLiftToPlayer = m_ForkLift.FindAction("ForkLiftToPlayer", throwIfNotFound: true);
+        m_ForkLift_LiftControls = m_ForkLift.FindAction("LiftControls", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -724,6 +959,55 @@ public class @GameInputs : IInputActionCollection, IDisposable
         }
     }
     public DroneActions @Drone => new DroneActions(this);
+
+    // ForkLift
+    private readonly InputActionMap m_ForkLift;
+    private IForkLiftActions m_ForkLiftActionsCallbackInterface;
+    private readonly InputAction m_ForkLift_Movement;
+    private readonly InputAction m_ForkLift_ForkLiftToPlayer;
+    private readonly InputAction m_ForkLift_LiftControls;
+    public struct ForkLiftActions
+    {
+        private @GameInputs m_Wrapper;
+        public ForkLiftActions(@GameInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_ForkLift_Movement;
+        public InputAction @ForkLiftToPlayer => m_Wrapper.m_ForkLift_ForkLiftToPlayer;
+        public InputAction @LiftControls => m_Wrapper.m_ForkLift_LiftControls;
+        public InputActionMap Get() { return m_Wrapper.m_ForkLift; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ForkLiftActions set) { return set.Get(); }
+        public void SetCallbacks(IForkLiftActions instance)
+        {
+            if (m_Wrapper.m_ForkLiftActionsCallbackInterface != null)
+            {
+                @Movement.started -= m_Wrapper.m_ForkLiftActionsCallbackInterface.OnMovement;
+                @Movement.performed -= m_Wrapper.m_ForkLiftActionsCallbackInterface.OnMovement;
+                @Movement.canceled -= m_Wrapper.m_ForkLiftActionsCallbackInterface.OnMovement;
+                @ForkLiftToPlayer.started -= m_Wrapper.m_ForkLiftActionsCallbackInterface.OnForkLiftToPlayer;
+                @ForkLiftToPlayer.performed -= m_Wrapper.m_ForkLiftActionsCallbackInterface.OnForkLiftToPlayer;
+                @ForkLiftToPlayer.canceled -= m_Wrapper.m_ForkLiftActionsCallbackInterface.OnForkLiftToPlayer;
+                @LiftControls.started -= m_Wrapper.m_ForkLiftActionsCallbackInterface.OnLiftControls;
+                @LiftControls.performed -= m_Wrapper.m_ForkLiftActionsCallbackInterface.OnLiftControls;
+                @LiftControls.canceled -= m_Wrapper.m_ForkLiftActionsCallbackInterface.OnLiftControls;
+            }
+            m_Wrapper.m_ForkLiftActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Movement.started += instance.OnMovement;
+                @Movement.performed += instance.OnMovement;
+                @Movement.canceled += instance.OnMovement;
+                @ForkLiftToPlayer.started += instance.OnForkLiftToPlayer;
+                @ForkLiftToPlayer.performed += instance.OnForkLiftToPlayer;
+                @ForkLiftToPlayer.canceled += instance.OnForkLiftToPlayer;
+                @LiftControls.started += instance.OnLiftControls;
+                @LiftControls.performed += instance.OnLiftControls;
+                @LiftControls.canceled += instance.OnLiftControls;
+            }
+        }
+    }
+    public ForkLiftActions @ForkLift => new ForkLiftActions(this);
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -736,5 +1020,11 @@ public class @GameInputs : IInputActionCollection, IDisposable
         void OnRotate(InputAction.CallbackContext context);
         void OnThrust(InputAction.CallbackContext context);
         void OnDroneToPlayer(InputAction.CallbackContext context);
+    }
+    public interface IForkLiftActions
+    {
+        void OnMovement(InputAction.CallbackContext context);
+        void OnForkLiftToPlayer(InputAction.CallbackContext context);
+        void OnLiftControls(InputAction.CallbackContext context);
     }
 }

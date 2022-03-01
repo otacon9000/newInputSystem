@@ -40,7 +40,7 @@ namespace Game.Scripts.LiveObjects
             }
         }
 
-        private void ExitDriveMode()
+        public void ExitDriveMode()
         {
             _inDriveMode = false;
             _forkliftCam.Priority = 9;            
@@ -49,40 +49,40 @@ namespace Game.Scripts.LiveObjects
             
         }
 
-        private void Update()
-        {
-            if (_inDriveMode == true)
-            {
-                LiftControls();
-                CalcutateMovement();
-                if (Input.GetKeyDown(KeyCode.Escape))
-                    ExitDriveMode();
-            }
+        //private void Update()
+        //{
+        //    if (_inDriveMode == true)
+        //    {
+        //        LiftControls();
+        //        CalcutateMovement();
+        //        if (Input.GetKeyDown(KeyCode.Escape))
+        //            ExitDriveMode();
+        //    }
 
-        }
+        //}
 
-        private void CalcutateMovement()
+        public void CalcutateMovement(float horizontal, float vertical)
         {
-            float h = Input.GetAxisRaw("Horizontal");
-            float v = Input.GetAxisRaw("Vertical");
-            var direction = new Vector3(0, 0, v);
+            //float h = Input.GetAxisRaw("Horizontal");
+            //float v = Input.GetAxisRaw("Vertical");
+            var direction = new Vector3(0, 0, vertical);
             var velocity = direction * _speed;
 
             transform.Translate(velocity * Time.deltaTime);
 
-            if (Mathf.Abs(v) > 0)
+            if (Mathf.Abs(vertical) > 0)
             {
                 var tempRot = transform.rotation.eulerAngles;
-                tempRot.y += h * _speed / 2;
+                tempRot.y += horizontal * _speed / 2;
                 transform.rotation = Quaternion.Euler(tempRot);
             }
         }
 
-        private void LiftControls()
+        public void LiftControls(float value)
         {
-            if (Input.GetKey(KeyCode.R))
+            if (value >= 0.8f)
                 LiftUpRoutine();
-            else if (Input.GetKey(KeyCode.T))
+            if (value <= -0.8f)
                 LiftDownRoutine();
         }
 
