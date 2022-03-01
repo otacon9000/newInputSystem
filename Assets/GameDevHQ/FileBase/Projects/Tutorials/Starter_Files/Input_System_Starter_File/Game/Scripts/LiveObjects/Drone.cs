@@ -131,6 +131,11 @@ namespace Game.Scripts.LiveObjects
             transform.rotation = Quaternion.Euler(z * _tiltAngle, transform.localRotation.eulerAngles.y, -x * _tiltAngle);
         }
 
+        public bool GetFlightMode()
+        {
+            return _inFlightMode;
+        }
+
         private void OnDisable()
         {
             InteractableZone.onZoneInteractionComplete -= EnterFlightMode;

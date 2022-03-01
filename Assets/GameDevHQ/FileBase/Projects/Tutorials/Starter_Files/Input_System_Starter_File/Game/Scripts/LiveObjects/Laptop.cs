@@ -29,31 +29,52 @@ namespace Game.Scripts.LiveObjects
             //InteractableZone.onHoldEnded += InteractableZone_onHoldEnded;
         }
 
-        private void Update()
+        //private void Update()
+        //{
+        //    if (_hacked == true)
+        //    {
+        //        if (Input.GetKeyDown(KeyCode.E))
+        //        {
+        //            var previous = _activeCamera;
+        //            _activeCamera++;
+
+
+        //            if (_activeCamera >= _cameras.Length)
+        //                _activeCamera = 0;
+
+
+        //            _cameras[_activeCamera].Priority = 11;
+        //            _cameras[previous].Priority = 9;
+        //        }
+
+        //        if (Input.GetKeyDown(KeyCode.Escape))
+        //        {
+        //            _hacked = false;
+        //            onHackEnded?.Invoke();
+        //            ResetCameras();
+        //        }
+        //    }
+        //}
+
+        public void CameraControl()
         {
-            if (_hacked == true)
-            {
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    var previous = _activeCamera;
-                    _activeCamera++;
+            var previous = _activeCamera;
+            _activeCamera++;
 
 
-                    if (_activeCamera >= _cameras.Length)
-                        _activeCamera = 0;
+            if (_activeCamera >= _cameras.Length)
+                _activeCamera = 0;
 
 
-                    _cameras[_activeCamera].Priority = 11;
-                    _cameras[previous].Priority = 9;
-                }
+            _cameras[_activeCamera].Priority = 11;
+            _cameras[previous].Priority = 9;
+        }
 
-                if (Input.GetKeyDown(KeyCode.Escape))
-                {
-                    _hacked = false;
-                    onHackEnded?.Invoke();
-                    ResetCameras();
-                }
-            }
+        public void ExitCamera()
+        {
+            _hacked = false;
+            onHackEnded?.Invoke();
+            ResetCameras();
         }
 
         void ResetCameras()
@@ -106,6 +127,11 @@ namespace Game.Scripts.LiveObjects
 
             //enable Vcam1
             _cameras[0].Priority = 11;
+        }
+
+        public bool GetHaked()
+        {
+            return _hacked;
         }
         
         private void OnDisable()

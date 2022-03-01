@@ -64,10 +64,23 @@ public class InputManager : MonoBehaviour
 
         _input.Drone.DroneToPlayer.performed += DroneToPlayer_performed;
 
-        //_input.ForkLift.LiftDown.canceled += LiftDown_performed;
-        //_input.ForkLift.LiftUp.canceled += LiftUp_performed;
         _input.ForkLift.ForkLiftToPlayer.performed += ForkLiftToPlayer_performed;
+
+        _input.Laptop.ChangeCamera.performed += ChangeCamera_performed;
+        _input.Laptop.LaptopToPlayer.performed += LaptopToPlayer_performed;
    
+    }
+
+    private void LaptopToPlayer_performed(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        _input.Laptop.Disable();
+        _input.Player.Enable();
+        _laptop.ExitCamera();
+    }
+
+    private void ChangeCamera_performed(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        _laptop.CameraControl();
     }
 
     private void ForkLiftToPlayer_performed(UnityEngine.InputSystem.InputAction.CallbackContext context)
@@ -77,15 +90,6 @@ public class InputManager : MonoBehaviour
         _forkLift.ExitDriveMode();
     }
 
-    //private void LiftUp_performed(UnityEngine.InputSystem.InputAction.CallbackContext context)
-    //{
-    //    _forkLift.LiftUpRoutine();
-    //}
-
-    //private void LiftDown_performed(UnityEngine.InputSystem.InputAction.CallbackContext context)
-    //{
-    //    _forkLift.LiftDownRoutine();
-    //}
 
     private void DroneToPlayer_performed(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
@@ -101,8 +105,12 @@ public class InputManager : MonoBehaviour
         if (InteractableZone.CurrentZoneID >= 3)
         {
             _laptop.InteractableZone_onHoldEnded(InteractableZone.CurrentZoneID);
-            //InteractableZone.Instance.DisableMarker();
-            //UIManager.Instance.DisplayInteractableZoneMessage(false);
+            if (_laptop.GetHaked() == true)
+            {
+                _input.Player.Disable();
+                _input.Laptop.Enable();
+            }
+
         }
     }
 
@@ -129,10 +137,9 @@ public class InputManager : MonoBehaviour
             case 3:
                 Debug.Log("Case interactable: 3");
                 _laptop.InteractableZone_onHoldStarted(InteractableZone.CurrentZoneID);
-
                 _hackingZone.DisableMarker();
-
                 UIManager.Instance.DisplayInteractableZoneMessage(false);
+            
                 break;
             case 4:
                 Debug.Log("Case interactable: 4");
@@ -144,6 +151,7 @@ public class InputManager : MonoBehaviour
                 break;
             case 5:
                 Debug.Log("Case interactable: 5");
+                UIManager.Instance.DisplayInteractableZoneMessage(false);
                 _input.Player.Disable();
                 _input.ForkLift.Enable();
                 _forkLiftZone.PerformAction();
@@ -167,13 +175,19 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
-
-        MovePlayer();
-        MoveDrone();
-        if (InteractableZone.CurrentZoneID == 6)
+        
+        if (_forkLift.GetDriveMode() == true)
         {
             MoveForkLift();
             ControlLift();
+        }
+        else if(_drone.GetFlightMode() == true)
+        {
+            MoveDrone();
+        }
+        else
+        {
+            MovePlayer();
         }
     }
 

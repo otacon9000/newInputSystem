@@ -788,6 +788,74 @@ public class @GameInputs : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Laptop "",
+            ""id"": ""ad9b9da7-0638-4312-9bcb-4dfc87d61dd9"",
+            ""actions"": [
+                {
+                    ""name"": ""LaptopToPlayer"",
+                    ""type"": ""Button"",
+                    ""id"": ""349ad129-afa6-4a7d-9ed6-498500209ee1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""ChangeCamera"",
+                    ""type"": ""Button"",
+                    ""id"": ""7264bc40-9e3d-458a-96d4-e628c3d98c3f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""71a39dec-77b3-4a6a-811d-a3394d76d924"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LaptopToPlayer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""504976b2-c538-484f-a16b-f000fdc1ce23"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LaptopToPlayer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8fc4220d-b083-4a4b-9184-6e9e380be4ac"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b6f474d8-96c8-4ba0-b22c-02703441591d"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -808,6 +876,10 @@ public class @GameInputs : IInputActionCollection, IDisposable
         m_ForkLift_Movement = m_ForkLift.FindAction("Movement", throwIfNotFound: true);
         m_ForkLift_ForkLiftToPlayer = m_ForkLift.FindAction("ForkLiftToPlayer", throwIfNotFound: true);
         m_ForkLift_LiftControls = m_ForkLift.FindAction("LiftControls", throwIfNotFound: true);
+        // Laptop 
+        m_Laptop = asset.FindActionMap("Laptop ", throwIfNotFound: true);
+        m_Laptop_LaptopToPlayer = m_Laptop.FindAction("LaptopToPlayer", throwIfNotFound: true);
+        m_Laptop_ChangeCamera = m_Laptop.FindAction("ChangeCamera", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1008,6 +1080,47 @@ public class @GameInputs : IInputActionCollection, IDisposable
         }
     }
     public ForkLiftActions @ForkLift => new ForkLiftActions(this);
+
+    // Laptop 
+    private readonly InputActionMap m_Laptop;
+    private ILaptopActions m_LaptopActionsCallbackInterface;
+    private readonly InputAction m_Laptop_LaptopToPlayer;
+    private readonly InputAction m_Laptop_ChangeCamera;
+    public struct LaptopActions
+    {
+        private @GameInputs m_Wrapper;
+        public LaptopActions(@GameInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @LaptopToPlayer => m_Wrapper.m_Laptop_LaptopToPlayer;
+        public InputAction @ChangeCamera => m_Wrapper.m_Laptop_ChangeCamera;
+        public InputActionMap Get() { return m_Wrapper.m_Laptop; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(LaptopActions set) { return set.Get(); }
+        public void SetCallbacks(ILaptopActions instance)
+        {
+            if (m_Wrapper.m_LaptopActionsCallbackInterface != null)
+            {
+                @LaptopToPlayer.started -= m_Wrapper.m_LaptopActionsCallbackInterface.OnLaptopToPlayer;
+                @LaptopToPlayer.performed -= m_Wrapper.m_LaptopActionsCallbackInterface.OnLaptopToPlayer;
+                @LaptopToPlayer.canceled -= m_Wrapper.m_LaptopActionsCallbackInterface.OnLaptopToPlayer;
+                @ChangeCamera.started -= m_Wrapper.m_LaptopActionsCallbackInterface.OnChangeCamera;
+                @ChangeCamera.performed -= m_Wrapper.m_LaptopActionsCallbackInterface.OnChangeCamera;
+                @ChangeCamera.canceled -= m_Wrapper.m_LaptopActionsCallbackInterface.OnChangeCamera;
+            }
+            m_Wrapper.m_LaptopActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @LaptopToPlayer.started += instance.OnLaptopToPlayer;
+                @LaptopToPlayer.performed += instance.OnLaptopToPlayer;
+                @LaptopToPlayer.canceled += instance.OnLaptopToPlayer;
+                @ChangeCamera.started += instance.OnChangeCamera;
+                @ChangeCamera.performed += instance.OnChangeCamera;
+                @ChangeCamera.canceled += instance.OnChangeCamera;
+            }
+        }
+    }
+    public LaptopActions @Laptop => new LaptopActions(this);
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -1026,5 +1139,10 @@ public class @GameInputs : IInputActionCollection, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnForkLiftToPlayer(InputAction.CallbackContext context);
         void OnLiftControls(InputAction.CallbackContext context);
+    }
+    public interface ILaptopActions
+    {
+        void OnLaptopToPlayer(InputAction.CallbackContext context);
+        void OnChangeCamera(InputAction.CallbackContext context);
     }
 }

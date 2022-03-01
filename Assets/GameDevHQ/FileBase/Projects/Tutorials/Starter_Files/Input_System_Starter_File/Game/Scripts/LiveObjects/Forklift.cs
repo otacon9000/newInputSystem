@@ -110,6 +110,12 @@ namespace Game.Scripts.LiveObjects
                 _lift.transform.localPosition = _liftLowerLimit;
         }
 
+        public  bool GetDriveMode()
+        {
+            return _inDriveMode;
+        }
+
+
         private void OnDisable()
         {
             InteractableZone.onZoneInteractionComplete -= EnterDriveMode;
